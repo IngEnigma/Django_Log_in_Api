@@ -14,14 +14,14 @@ class Query(graphene.ObjectType):
 
 class CreateAPILog(graphene.Mutation):
     class Arguments:
-        user = graphene.String()
+        username = graphene.String()
         request_data = graphene.String()
         response_data = graphene.String()
 
     log = graphene.Field(APILogType)
 
-    def mutate(self, info, user, request_data, response_data):
-        log = APILog.objects.create(user=user, request_data=request_data, response_data=response_data)
+    def mutate(self, info, username, request_data, response_data):
+        log = APILog.objects.create(username=username, request_data=request_data, response_data=response_data)
         return CreateAPILog(log=log)
 
 class Mutation(graphene.ObjectType):
